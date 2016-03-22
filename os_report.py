@@ -29,7 +29,7 @@ if __name__ == "__main__":
     while True:
         a, b, c = os.getloadavg()
         p = Popen([os.path.join(os.path.dirname(os.path.realpath(__file__)), "osx-cpu-temp", "osx-cpu-temp")], stdout=PIPE)
-        cpu_temp = float(p.communicate()[0].decode())
+        cpu_temp = float(p.communicate()[0].decode()[:-3])
         data = {
             construct_name(r"boot time"): psutil.boot_time(),
             construct_name(r"load average - 1min"): a,
