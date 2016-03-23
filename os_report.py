@@ -26,6 +26,9 @@ def get_cpu_temp():
 def get_battery_level():
     return float(run(["pmset", "-g", "batt"]).decode().split("\n")[1].split()[1][:-2])
 
+def get_fan_speed():
+    return int([x.strip() for x in run([os.path.join(os.path.dirname(os.path.realpath(__file__)), "smcfancontrol/smcFanControl.app/Contents/Resources/smc"), "-f"]).decode().split("\n")][4].split()[-1])
+
 def send(data):
     payload = {
         "json": json.JSONEncoder(sort_keys=True).encode(data),
@@ -49,7 +52,8 @@ if __name__ == "__main__":
                 construct_name(r"system-disk-percent"): psutil.disk_usage('/').percent,
                 construct_name(r"process-count"): len(psutil.pids()),
                 construct_name(r"cpu-temp"): get_cpu_temp(),
-                construct_name(r"battery"): get_battery_level()
+                construct_name(r"battery"): get_battery_level(),
+                construct_name(r"fan-speed"): get_fan_speed()
             }
             print("Sending: ", data)
             send(data)
