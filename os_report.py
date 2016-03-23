@@ -57,4 +57,4 @@ if __name__ == "__main__":
         except KeyboardInterrupt:
             break
         except:
-            pass
+            time.sleep(interval)
