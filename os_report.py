@@ -8,6 +8,7 @@ import psutil
 import requests
 from subprocess import Popen, PIPE
 import time
+import sys
 
 apikey = "2032057e1f79261b04bfd9a17ffc90eb"
 computer_name = "mbp"
@@ -57,8 +58,12 @@ if __name__ == "__main__":
             }
             print("Sending: ", data)
             send(data)
+            if len(sys.argv) > 1 and sys.argv[1] == "runonce":
+                sys.exit(0)
             time.sleep(interval)
         except KeyboardInterrupt:
             break
         except:
+            if len(sys.argv) > 1 and sys.argv[1] == "runonce":
+                sys.exit(0)
             time.sleep(interval)
