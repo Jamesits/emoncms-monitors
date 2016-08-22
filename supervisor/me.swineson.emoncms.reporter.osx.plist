@@ -4,8 +4,12 @@
 <dict>
 	<key>Label</key>
 	<string>me.swineson.emoncms.reporter.osx</string>
+	<key>LowPriorityBackgroundIO</key>
+	<true/>
 	<key>LowPriorityIO</key>
 	<true/>
+	<key>ProcessType</key>
+	<string>Background</string>
 	<key>ProgramArguments</key>
 	<array>
 		<string>/usr/local/bin/python3</string>
